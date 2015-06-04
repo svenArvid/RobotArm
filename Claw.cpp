@@ -57,7 +57,7 @@ void Claw::Calculate_control(){
 	}
 	
 	if(motion_counter >= 7 ){		// stop motor when arrived at correct position
-		Serial.println("claw");
+		if(DEBUGMODE) {	Serial.println("claw"); }
 		Stop_motor();
 		motion_counter = 0;
 		pos = ref;

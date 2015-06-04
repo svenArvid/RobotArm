@@ -14,7 +14,7 @@ Motor::Motor(int en_pin, int A1_pin, int A2_pin, int sens_pin, float K_prop) :	/
 	digitalWrite(FORWARD_PIN, LOW);
 	digitalWrite(BACKWARD_PIN,LOW);
 	
-	pinMode(SENSOR_PIN, INPUT);
+	pinMode(SENSOR_PIN, INPUT_PULLUP);
 		
 	pos = 0;			// MAYBE Set to an in parameter?
 	K_kick = 200;		// // MAYBE Set to an in parameter?
@@ -45,7 +45,7 @@ void Motor::Update_position()
 			watchdog_timer = 0;
 			dir = 0;
 			Stop_motor();
-			Serial.print("pos: "); Serial.println(pos);
+			if(DEBUGMODE) {	Serial.print("pos: "); Serial.println(pos); }
 		}
 	}
 	
@@ -89,5 +89,5 @@ void Motor::Calculate_control(){
 		}
 		analogWrite(ENABLE_PIN, abs(u));  	
 	}
-	Serial.print("u: "); Serial.println(u);
+	if(DEBUGMODE) {	Serial.print("u: "); Serial.println(u); }
 }

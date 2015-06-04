@@ -18,6 +18,8 @@
 // Declare general functions
 int Sign(float var);
 
+#define DEBUGMODE 1
+
 #endif
 
 
