@@ -21,17 +21,6 @@ Claw::Claw(int en_pin, int A1_pin, int A2_pin, claw_state init_pos)	// class con
 	digitalWrite(BACKWARD_PIN,LOW);
 }
 
-claw_state Claw::Get_ref(void){
-	return ref;	
-}
-void Claw::Set_ref(claw_state r){
-	ref = r;
-}
-
-claw_state Claw::Get_pos(void){
-	return pos;
-}
-
 void Claw::Stop_motor(void){
     digitalWrite(FORWARD_PIN,LOW);
     digitalWrite(BACKWARD_PIN,LOW);	
@@ -39,7 +28,7 @@ void Claw::Stop_motor(void){
 		
 }
 
-void Claw::Calculate_control(){
+void Claw::Manage_control(){
 	if( pos != ref ){      			// Move claw
 		switch(ref){
 			case CLOSED:			// then open...
@@ -56,11 +45,11 @@ void Claw::Calculate_control(){
 		digitalWrite(ENABLE_PIN, HIGH);		
 	}
 	
-	if(motion_counter >= 7 ){		// stop motor when arrived at correct position
-		if(DEBUGMODE) {	Serial.println("claw"); }
+	if(motion_counter >= 7 ){		// stop motor after a TIMEOUT, since arrived at correct position
 		Stop_motor();
 		motion_counter = 0;
 		pos = ref;
+		
+		if(DEBUGMODE) {	Serial.println("claw"); }
 	}
-	
 }

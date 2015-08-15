@@ -11,14 +11,14 @@ class Claw
 	// constructor
 	Claw(int en_pin, int A1_pin, int A2_pin, claw_state init_pos);
 	
-	claw_state Get_ref(void);
-	void Set_ref(claw_state r);
-	claw_state Get_pos(void);
-		
+	inline claw_state Get_ref (void) const {return ref;}
+	inline void Set_ref(claw_state r) {ref = r;}
+	inline claw_state Get_pos (void) const {return pos;}
+			
 	void Stop_motor(void);
 	
-	/* Calculate control signal. If at wrong position move motor until a timeout. Then stop motor and update position */
-	void Calculate_control(void);
+	/* Manage motor control signal. If at wrong position move motor until a timeout. Then stop motor and update position */
+	void Manage_control(void);
   
   private:
 	int ENABLE_PIN;
