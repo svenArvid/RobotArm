@@ -13,7 +13,9 @@ class Claw
 	
 	inline claw_state Get_ref (void) const {return ref;}
 	inline void Set_ref(claw_state r) {ref = r;}
+	
 	inline claw_state Get_pos (void) const {return pos;}
+	inline void Set_pos(claw_state p) { pos = p; }
 			
 	void Stop_motor(void);
 	

@@ -19,6 +19,7 @@ class Motor
 	inline int Get_dir() const  { return dir; }  // Declared as const, i.e. member function does NOT alter any members (read only) 
 	
 	inline void Set_ref(int r) { ref = r; }	
+	inline void Set_pos(int p) { pos = p; }
 	
 	/* Manage robot position by reading motion sensor and call Update_position() when positive (or negative edge detected). 
 	   If no edges are detected for some time, i.e. no movement: reset dir and call Stop_motor()  */
@@ -78,6 +79,8 @@ class HorizontalMotor : public Motor
 	// constructor calls base constructor first
     HorizontalMotor(String n, int en_pin, int A1_pin, int A2_pin, int sens_pin, float K_prop=5.5, int K_kick_param=200) : 
 	Motor(n, en_pin, A1_pin, A2_pin, sens_pin, K_prop, K_kick_param) {backlash_pos = BACKLASH_MAX;} 			
+	
+	inline void Set_backlash(int p) { backlash_pos = p; }
 	
 	void Update_position();	// Updates position state and also backlash_pos
 	
